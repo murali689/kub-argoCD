@@ -1,0 +1,20 @@
+replicaCount: 2
+
+image:
+  repository: terraformaksacr2026.azurecr.io/aks-db-app
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+
+ingress:
+  enabled: false
+  className: azure-application-gateway
+  path: /
+  pathType: Prefix
+
+postgres:
+  secretName: postgres-secret
